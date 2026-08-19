@@ -1,21 +1,15 @@
-
 version: 2
 
-models:
-    - name: my_first_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+sources:
+  - name: raw              # dbt'de source'u bu isimle çağıracaksın
+    schema: gz_raw_data    # BigQuery dataset adı
 
-    - name: my_second_dbt_model
-      description: "A starter dbt model"
-      columns:
-          - name: id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
+    tables:
+      - name: sales        # dbt'de gözükecek kısa isim
+        identifier: raw_sales   # BigQuery'deki gerçek tablo adı
+
+      - name: product
+        identifier: raw_product
+
+      - name: ship
+        identifier: raw_ship
