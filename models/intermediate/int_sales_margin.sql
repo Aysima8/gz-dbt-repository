@@ -1,6 +1,12 @@
-select 
-s.quantity * p.purchase_price as purchase_price_maliyet,
-s.revenue - (s.quantity * p.purchase_price) as marj
-from {{ ref('stg_raw__sales') }} as s
-left join {{ ref('stg_raw__product') }} as p
-  on s.products_id = p.products_id
+SELECT
+	s.products_id,
+	s.date_date,
+	s.orders_id,
+	s.revenue,
+	s.quantity,
+	p.purchase_price,
+	ROUND(s.quantity*p.purchase_price,2) AS purchase_cost,
+	ROUND(s.revenue - s.quantity*p.purchase_price, 2) AS margin
+FROM {{ref("stg_raw__sales")}} s
+LEFT JOIN {{ref("stg_raw__product")}} p
+on s.products_id = p.products_id
