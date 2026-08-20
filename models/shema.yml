@@ -21,7 +21,7 @@ sources:
       - name: sales
         identifier: raw_sales
         description: "sales data for Greenweez orders"
-        
+
         columns:
           - name: date_date
             description: "date of purchase"
@@ -42,11 +42,10 @@ sources:
           - unique:
               column_name: "(orders_id || '-' || pdt_id)"
           - dbt_utils.unique_combination_of_columns:
-              combination_of_columns:
-                - orders_id
-                - pdt_id
-
-       
+              arguments:
+                combination_of_columns:
+                  - orders_id
+                  - pdt_id
 
       - name: ship
         identifier: raw_ship
